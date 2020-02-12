@@ -20,6 +20,10 @@ import org.springframework.format.annotation.NumberFormat;
 @Entity
 public class CadastroMoto {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long codigo;
+	
 	@NotEmpty(message = "Descrição obrigatoria.")
 	@Size( max = 60, message = "A descrição não pode conter mais de 60 caracteres")
 	private String modelo;
@@ -36,10 +40,7 @@ public class CadastroMoto {
 	@Enumerated(EnumType.STRING)
 	private StatusTitulo status;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
-
+	
 	public String getModelo() {
 		return modelo;
 	}

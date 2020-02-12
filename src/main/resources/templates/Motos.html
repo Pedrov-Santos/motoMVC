@@ -21,7 +21,7 @@
 	</div>
 	
 	
-<form class="card" method="POST" action="/moto" th:object="${casdtroMoto}">
+<form class="card" method="POST" action="/moto" th:object="${cadastroMoto}">
 
 <div class="alert alert-success" th:if="${! #strings.isEmpty(mensagem)}">
 	<span th:text="${mensagem}" >Moto salva com sucesso!</span>
@@ -31,6 +31,9 @@
 </div>
 
 <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+		<button type="button" class="close " data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
 	<div th:each="detailedError : ${#fields.detailedErrors()} ">
 		<span th:text="${detailedError.message}"></span>
 	</div>
@@ -43,7 +46,7 @@
 			<h5 class="card-title botao-pesquisa"> Cadastrar Nova Moto
 				<img src="/imagens/moto2.png" width="20" height="20"id="icone3">
 			</h5>
-			<a class="btn btn-link botao-novo" href="/agencia">Agencia
+			<a class="btn btn-link botao-novo" href="/agencia">Agência
 				 <img src="/imagens/agencia.png" width="20" height="20"id="icone2">
 			</a>
 
@@ -71,7 +74,7 @@
 			<div class="form-group row"  >
 				<label for="valorVenda" class="col-sm-2 col-form-label text-right" >Valor de Venda</label>
 				<div class="col-sm-2">
-					<input type="text" class=" form-control js-currency" id="valorVenda" name="valorVenda"
+					<input type="text" class=" form-control js-valor" id="valorVenda" name="valorVenda"
 						placeholder="ex: 8.200,00"  >
 				</div>
 			</div>
@@ -96,9 +99,10 @@
 
 	<script src="/js/jquery-3.4.1.min.js"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
-	<script src="/js/bootstrap-datepicker.min.js"></script>
-	<script src="/js/bootstrap-datepicker.pt-BR.min.js"></script>
-	<script src="/js/jquery.maskMoney.min.js"></script>
+	<script th:src="@{/js/jquery.maskMoney.min.js}"></script>
+	]
+	<script src="/js/motos.js"></script>
+
 	
 </body>
 </html>

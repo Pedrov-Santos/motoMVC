@@ -33,11 +33,6 @@ public class MotoController {
 		
 		
 	}
-
-	@RequestMapping("/agencia")
-	private String novasMotos() {
-		return "Agencia";
-	}
 	
 	@RequestMapping(value = "/moto" ,method = RequestMethod.POST)
 	public ModelAndView salvar(@Validated CadastroMoto novaMoto, Errors errors) {
@@ -49,6 +44,14 @@ public class MotoController {
 		
 		mv.addObject("mensagem", "Moto salva");
 		motos.save(novaMoto);
+		return mv;
+	}
+	
+	@RequestMapping("/agencia")
+	public ModelAndView ListarTodasMotos() {
+		List<CadastroMoto> todasMotos = motos.findAll();
+		ModelAndView mv = new ModelAndView("Agencia");
+		mv.addObject("motos", todasMotos);
 		return mv;
 	}
 	

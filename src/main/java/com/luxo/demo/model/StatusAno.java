@@ -17,7 +17,7 @@ public enum StatusAno {
 	
 	private int ano;
 	
-	private StatusAno(int ano) {
+	 StatusAno(int ano) {
 		this.ano = ano;
 	}
 
