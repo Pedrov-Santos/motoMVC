@@ -49,11 +49,22 @@
 							<tr th:each=" veiculo : ${motos}">
 								<td class = "text-center" th:text= "${veiculo.codigo}"></td>
 								<td th:text="${veiculo.modelo}"></td>
-								<td class="text-right" th:text="${veiculo.ano}"></td>
+								<td class="text-right" th:text="${veiculo.ano.ano}"></td>
 								<td class="text-center"  th:text="|R$ ${{veiculo.valorVenda}}|"></td>
-								<td class="text-right" th:text="${veiculo.status}">	</td>
+								<td class="text-right" th:text="${veiculo.status.descricao}">
+								<button type="button" class="btn btn-secondary">Secondary</button>
+									</td>
 								<td class="text-center">
+									<a class = "btn btn-link btn-xs" title="Editar" rel="tooltip" data-placement="top" > 
+									<span  ><img src="/imagens/editar.png" width="25" height="25" id="icone-editar"> </span>
+									</a>
+									<a class = "btn btn-link btn-xs" title="Excluir" rel="tooltip" data-placement="top" > 
+									<span  ><img src="/imagens/excluir.png" width="25" height="25" id="icone-editar"> </span>
+									</a>
 									
+									<a class = "btn btn-link btn-xs" title="Vender" rel="tooltip" data-placement="top" > 
+									<span  ><img src="/imagens/vender.png" width="25" height="25" id="icone-editar"> </span>
+									</a>
 								</td>
 								
 							</tr>
