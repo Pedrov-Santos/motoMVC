@@ -9,14 +9,15 @@
 <title>Motos</title>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
-<link rel="stylesheet" type="text/css" href="/css/bootstrap-datepicker.standalone.min.css" />
+
+
 </head>
 
 <body>
 	<div class="container-fluid">
 		<nav class="navbar navbar-dark bg-dark">
 			<a class="navbar-brand" href="/moto">
-			<img src="/imagens/moto.png" width="40" height="40">Motos Honda</a>
+			<img src="/imagens/moto.png" width="201" height="40"></a>
 		</nav>
 	</div>
 	
@@ -43,6 +44,7 @@
 
 <div class="card card-body">
 	<div class="card-body">
+	<input type="hidden" th:field="*{codigo}" />
 			<h5 class="card-title botao-pesquisa"> Cadastrar Nova Moto
 				<img src="/imagens/moto2.png" width="20" height="20"id="icone3">
 			</h5>
@@ -55,7 +57,7 @@
 			<div class="form-group row">
 				<label for="modelo" class="col-sm-2 col-form-label text-right">Modelo</label>
 				<div class="col-sm-4">
-					<input type="text" class=" form-control" id='modelo' name="modelo"
+					<input type="text" class=" form-control" id='modelo' th:field="*{modelo}"
 						 placeholder="ex: CB-500R " >
 				</div>
 			</div>
@@ -63,7 +65,7 @@
 			<div class="form-group row">
 				<label for="ano"class="col-sm-2 col-form-label text-right">Ano</label>
 					<div class="col-sm-2">
-					<select class=" form-control" name='ano'>
+					<select class=" form-control" th:field="*{ano}">
 						<option th:each="ano : ${todosAnos}" th:value="${ano}" th:text="${ano.ano}">
 						</option>
 					</select>
@@ -74,7 +76,7 @@
 			<div class="form-group row"  >
 				<label for="valorVenda" class="col-sm-2 col-form-label text-right" >Valor de Venda</label>
 				<div class="col-sm-2">
-					<input type="text" class=" form-control js-valor" id="valorVenda" name="valorVenda"
+					<input type="text" class=" form-control js-valor" id="valorVenda" th:field="*{valorVenda}"
 						placeholder="ex: 8.200,00"  >
 				</div>
 			</div>
@@ -100,9 +102,10 @@
 	<script src="/js/jquery-3.4.1.min.js"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 	<script th:src="@{/js/jquery.maskMoney.min.js}"></script>
-	]
+	
 	<script src="/js/motos.js"></script>
-
+	
+	
 	
 </body>
 </html>

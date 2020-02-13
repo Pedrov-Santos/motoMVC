@@ -6,20 +6,22 @@
 
 <head>
 <meta charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset-UTF-8"/>
+<meta name="viewport" content="width=device-width"/>
 <title>Agencia</title>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
-<link rel="stylesheet" type="text/css" href="/css/bootstrap-datepicker.standalone.min.css" />
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
 </head>
 
 <body>
 	<div class="container-fluid">
 		<nav class="navbar navbar-dark bg-dark">
 			<a class="navbar-brand" href="/moto">
-			<img src="/imagens/moto.png" width="40" height="40">Motos Honda</a>
+			<img src="/imagens/moto.png" width="210" height="40"></a>
 		</nav>
 	</div>
-
 <div class="card">
 		
 			<div class="clearfix">
@@ -30,11 +32,11 @@
 				</a> <img src="/imagens/moto3.png" width="20" height="20" id="icone">
 			</div>
 			
-			
+</div>			
 			
 			<div class="card-body">
 				<div id="tabela">
-					<table class="table table-striped table table-bordered" height="0" >
+					<table class="table table-striped table table-bordered">
 						<thead>
 							<tr>
 								<th class="text-center" width="10%">#</th>
@@ -51,19 +53,21 @@
 								<td th:text="${veiculo.modelo}"></td>
 								<td class="text-right" th:text="${veiculo.ano.ano}"></td>
 								<td class="text-center"  th:text="|R$ ${{veiculo.valorVenda}}|"></td>
-								<td class="text-right" th:text="${veiculo.status.descricao}">
-								<button type="button" class="btn btn-secondary">Secondary</button>
+								<td class="text-right" >
+								<button type="button" class="btn btn-sm" th:text="${veiculo.status.descricao}"
+								th:classappend="${#strings.toString(veiculo.status) == 'VENDIDA' ? 'btn-success' : 'btn-danger'}"></button>
 									</td>
 								<td class="text-center">
-									<a class = "btn btn-link btn-xs" title="Editar" rel="tooltip" data-placement="top" > 
+									<a class = "btn btn-link btn-xs" title="Editar" rel="tooltip" data-placement="top" th:href="@{/motoEdicao/{codigo}(codigo=${veiculo.codigo})}" > 
 									<span  ><img src="/imagens/editar.png" width="25" height="25" id="icone-editar"> </span>
 									</a>
-									<a class = "btn btn-link btn-xs" title="Excluir" rel="tooltip" data-placement="top" > 
+									
+									<a class = "btn btn-link btn-xs" title="Excluir" rel="tooltip" data-placement="top" data-toggle="modal" data-torget="#excluirMotoSistema" > 
 									<span  ><img src="/imagens/excluir.png" width="25" height="25" id="icone-editar"> </span>
 									</a>
 									
-									<a class = "btn btn-link btn-xs" title="Vender" rel="tooltip" data-placement="top" > 
-									<span  ><img src="/imagens/vender.png" width="25" height="25" id="icone-editar"> </span>
+									<a class = "btn btn-link btn-xs" th:if="${veiculo.status}" title="Vender" rel="tooltip" data-placement="top" > 
+									<span  ><img src="/imagens/vender.png" width="25" height="25" > </span>
 									</a>
 								</td>
 								
@@ -74,9 +78,9 @@
 						</tbody>
 					</table>
 				</div>
-		<div layout:insert="ExcluirTitulo"></div>
+							<div layout:insert="ExcluirMoto"></div>
 			</div>
-</div>			
+	
 
 
 
@@ -85,6 +89,9 @@
 	<script th:src="@{/js/jquery.maskMoney.min.js}"></script>
 	
 	<script src="/js/motos.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
 	
 </body>

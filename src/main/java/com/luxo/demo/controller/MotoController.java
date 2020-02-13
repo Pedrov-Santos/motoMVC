@@ -2,12 +2,14 @@ package com.luxo.demo.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -54,6 +56,16 @@ public class MotoController {
 		mv.addObject("motos", todasMotos);
 		return mv;
 	}
+	
+	@RequestMapping("/motoEdicao/{codigo}")
+	public ModelAndView editar(@PathVariable ("codigo") Long codigo) {
+		ModelAndView mv = new ModelAndView("Motos");
+		Optional<CadastroMoto> moto = motos.findById(codigo);
+		mv.addObject(moto.get());
+		return mv ;
+	}
+	
+	
 	
 	@ModelAttribute("todosAnos")
 	public List<StatusAno> todosAnos(){
