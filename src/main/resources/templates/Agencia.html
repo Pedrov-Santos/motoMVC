@@ -11,7 +11,8 @@
 <title>Agencia</title>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+ 
 
 </head>
 
@@ -45,6 +46,7 @@
 								<th class="text-center" width="15%">Valor de Venda</th>
 								<th class="text-right" width="10%">Status</th>
 								<th width="15%"></th>
+						
 							</tr>
 						</thead>
 						<tbody>
@@ -53,42 +55,49 @@
 								<td th:text="${veiculo.modelo}"></td>
 								<td class="text-right" th:text="${veiculo.ano.ano}"></td>
 								<td class="text-center"  th:text="|R$ ${{veiculo.valorVenda}}|"></td>
-								<td class="text-right" >
-								<button type="button" class="btn btn-sm" th:text="${veiculo.status.descricao}"
-								th:classappend="${#strings.toString(veiculo.status) == 'VENDIDA' ? 'btn-success' : 'btn-danger'}"></button>
-									</td>
+								<td class="text-right" th:attr="data-role=${veiculo.codigo}" >
+								<button type="button" class="btn btn-sm" th:text="${veiculo.status.descricao}"th:classappend="${#strings.toString(veiculo.status) == 'VENDIDA' ? 'btn-success' : 'btn-danger'}"></button></td>
 								<td class="text-center">
 									<a class = "btn btn-link btn-xs" title="Editar" rel="tooltip" data-placement="top" th:href="@{/motoEdicao/{codigo}(codigo=${veiculo.codigo})}" > 
 									<span  ><img src="/imagens/editar.png" width="25" height="25" id="icone-editar"> </span>
 									</a>
 									
-									<a class = "btn btn-link btn-xs" title="Excluir" rel="tooltip" data-placement="top" data-toggle="modal" data-torget="#excluirMotoSistema" > 
+									<a class = "btn btn-link btn-xs" title="Excluir" rel="tooltip" data-placement="top"
+									th:href="@{/agencia/delete/{codigo}(codigo=${veiculo.codigo})}"> 
 									<span  ><img src="/imagens/excluir.png" width="25" height="25" id="icone-editar"> </span>
 									</a>
 									
-									<a class = "btn btn-link btn-xs" th:if="${veiculo.status}" title="Vender" rel="tooltip" data-placement="top" > 
-									<span  ><img src="/imagens/vender.png" width="25" height="25" > </span>
-									</a>
 								</td>
+								
 								
 							</tr>
 							<tr>
+							
 								<td colspan="6" th:if="${#lists.isEmpty(motos)}">Nenhum Título foi encontrado!</td>
 							</tr>
 						</tbody>
 					</table>
+							<div> <button type="button" class="btn btn-secondary btn-lg btn-block">
+							
+							
+							<a>Patrimonio total da Agência  </a>
+							 <a th:text="${#numbers.formatCurrency(#aggregates.sum(motos.![valorVenda]))}"></a>
+					<td colspan="6" th:if="${#lists.isEmpty(motos)}">0 (Nenhum veiculo cadastrado.)</td>
+											</button>			
+							</div>
 				</div>
-							<div layout:insert="ExcluirMoto"></div>
+						
 			</div>
 	
 
 
 
+	<script src="/js/motos.js"></script>
 	<script src="/js/jquery-3.4.1.min.js"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 	<script th:src="@{/js/jquery.maskMoney.min.js}"></script>
+	<script src="/js/editar.js"></script>
 	
-	<script src="/js/motos.js"></script>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>

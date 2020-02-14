@@ -6,4 +6,5 @@ import com.luxo.demo.model.CadastroMoto;
 
 public interface Motos extends JpaRepository<CadastroMoto, Long> {
 
+
 }

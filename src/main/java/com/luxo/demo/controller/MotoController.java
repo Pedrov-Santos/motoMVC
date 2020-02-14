@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.luxo.demo.model.CadastroMoto;
 import com.luxo.demo.model.StatusAno;
@@ -37,19 +38,22 @@ public class MotoController {
 	}
 	
 	@RequestMapping(value = "/moto" ,method = RequestMethod.POST)
-	public ModelAndView salvar(@Validated CadastroMoto novaMoto, Errors errors) {
+	public String salvar(@Validated CadastroMoto novaMoto, Errors errors , RedirectAttributes attributes) {
 		ModelAndView mv =  new ModelAndView("Motos");
 		
 		if(errors.hasErrors()) {
-			return mv ;
+			return "Motos" ;
 		}
 		
 		mv.addObject("mensagem", "Moto salva");
+
 		motos.save(novaMoto);
-		return mv;
+		attributes.addFlashAttribute("mensagem", "Moto Salva com sucesso!!!");
+
+		return "redirect:/moto";
 	}
 	
-	@RequestMapping("/agencia")
+	@RequestMapping( value = "/agencia")
 	public ModelAndView ListarTodasMotos() {
 		List<CadastroMoto> todasMotos = motos.findAll();
 		ModelAndView mv = new ModelAndView("Agencia");
@@ -65,7 +69,14 @@ public class MotoController {
 		return mv ;
 	}
 	
+
 	
+	@RequestMapping(value = "/agencia/delete/{codigo}", method = RequestMethod.GET)
+	public String excluir(@PathVariable Long codigo) {
+			motos.deleteById(codigo);
+	
+		return "redirect:/agencia";
+	}
 	
 	@ModelAttribute("todosAnos")
 	public List<StatusAno> todosAnos(){

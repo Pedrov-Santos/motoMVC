@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.NumberFormat;
 
 
+
 @Entity
 public class CadastroMoto {
 	
@@ -79,6 +80,10 @@ public class CadastroMoto {
 
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+	
+	public boolean isParaVenda() {
+		return StatusTitulo.PARAVENDA.equals(this.status);
 	}
 	
 	
